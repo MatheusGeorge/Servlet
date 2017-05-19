@@ -15,6 +15,12 @@ public class Logout extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getSession().removeAttribute("usuario.logado");
+		PrintWriter writer = resp.getWriter();
+		writer.println("<html><body> Deslogado com sucesso! </body></html>");
+		/* outro modo, desloga ele e tiro tudo da sessão
+		 req.getSession().Invalidate();
+		 com cookie
 		Cookie cookie = new Cookies(req.getCookies()).buscaUsuarioLogado();
 		PrintWriter writer = resp.getWriter();
 		if(cookie == null){
@@ -23,7 +29,6 @@ public class Logout extends HttpServlet{
 		}
 		cookie.setMaxAge(0);
 		resp.addCookie(cookie);
-		writer.println("<html><body> Deslogado com sucesso! </body></html>");
+	}*/
 	}
-
 }
