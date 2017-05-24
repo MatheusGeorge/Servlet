@@ -1,5 +1,5 @@
 <html>
 	<body>
-		Empresa adicionada com sucesso: ${empresa.nome}
+		Empresa adicionada com sucesso: ${nome}
 	</body>
 </html>

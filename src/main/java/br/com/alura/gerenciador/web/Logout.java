@@ -12,22 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns="/logout")
-public class Logout extends HttpServlet{
-	
+public class Logout implements Tarefa{
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getSession().removeAttribute("usuario.logado");
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/logout.html");
-		dispatcher.forward(req, resp);
-		
-		
-		
+	public String executa(HttpServletRequest req, HttpServletResponse resp) {
+		req.getSession().removeAttribute("usuarioLogado");
+		return "/WEB-INF/paginas/logout.html";
+	}
+
 		// direciona o cliete pelo lado dele, não é o recomendado se queremos esconder alguma pagina html
 		//resp.sendRedirect("logout.html");
 		
-		
-		
-		
+
 		/* outro modo, desloga ele e tiro tudo da sessão
 		 req.getSession().Invalidate();
 		 com cookie
@@ -40,5 +36,6 @@ public class Logout extends HttpServlet{
 		cookie.setMaxAge(0);
 		resp.addCookie(cookie);
 	}*/
-	}
+	
+	
 }

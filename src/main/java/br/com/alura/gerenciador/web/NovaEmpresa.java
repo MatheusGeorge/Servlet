@@ -13,19 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.Empresa;
 import br.com.alura.gerenciador.dao.EmpresaDAO;
 
-@WebServlet(urlPatterns="/novaEmpresa")
-public class NovaEmpresa extends HttpServlet {
+public class NovaEmpresa implements Tarefa {
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    public String executa(HttpServletRequest req,
+            HttpServletResponse resp) {
 
-		String nome = req.getParameter("nome");
-		Empresa empresa = new Empresa(nome);
-		new EmpresaDAO().adiciona(empresa);
-		// vai usar a expression language ${empresa.nome}
-		req.setAttribute("empresa", empresa);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/NovaEmpresa.jsp");
-		dispatcher.forward(req, resp);
-	}
+        String nome = req.getParameter("nome");
+
+        Empresa empresa = new Empresa(nome);
+        new EmpresaDAO().adiciona(empresa);
+
+        req.setAttribute("nome", nome);
+
+        return "/WEB-INF/paginas/NovaEmpresa.jsp";
+
+    }
 
 }
